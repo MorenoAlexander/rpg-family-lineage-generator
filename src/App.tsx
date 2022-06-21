@@ -19,7 +19,7 @@ import './styles/App.css';
 const queryClient = new QueryClient();
 
 export default function App() {
-  const preferredColorScheme = useColorScheme();
+  const preferredColorScheme = useColorScheme('dark');
   const [colorScheme, setColorScheme] =
     useState<ColorScheme>(preferredColorScheme);
   const toggleColorScheme = (value?: ColorScheme) => {
