@@ -29,6 +29,7 @@
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
     "react/jsx-one-expression-per-line": "off",
     "react/jsx-closing-tag-location": "off",
+    "react/jsx-wrap-multilines": "off",
     "react/prop-types": "off",
     "react/jsx-props-no-spreading": "off",
     "react/no-array-index-key": "off",
