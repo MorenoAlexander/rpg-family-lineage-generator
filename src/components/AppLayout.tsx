@@ -21,7 +21,10 @@ export default function AppLayout({ children }: AppLayoutProps) {
       header={
         <Header height={120} p="xs">
           <Group position="right">
-            <Button onClick={() => toggleColorScheme()}>
+            <Button
+              onClick={() => toggleColorScheme()}
+              id="btn-toggleColorScheme"
+            >
               {colorScheme === 'dark' ? <BsFillMoonFill /> : <BsFillSunFill />}
             </Button>
           </Group>
