@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import {
   ColorScheme,
@@ -10,10 +10,10 @@ import { useColorScheme } from '@mantine/hooks';
 
 import { QueryClient, QueryClientProvider } from 'react-query';
 import './styles/App.css';
-import { Node } from 'react-flow-renderer';
 import AppLayout from './components/AppLayout';
 import LineageGraph from './components/LineageGraph';
 import Person from './lib/models/Person';
+import PersonNode from './components/PersonNode';
 
 const queryClient = new QueryClient();
 
@@ -25,7 +25,7 @@ export default function App() {
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
   };
 
-  const initialNodes: Node<Person>[] = [
+  const initialNodes = [
     {
       id: '1',
       type: 'input',
@@ -34,11 +34,17 @@ export default function App() {
     },
     {
       id: '2',
-      data: new Person('Stonebeard', 'Wife of Stonebeard'),
+      type: 'personNode',
+      data: (() => {
+        const mother = new Person('Stonebeard', 'Wife of Stonebeard');
+        mother.isMale = false;
+        return mother;
+      })(),
       position: { x: 100, y: 125 },
     },
     {
       id: '3',
+      type: 'personNode',
       data: new Person('Stonebeard', 'First son of Stonebeard'),
       position: { x: 250, y: 250 },
     },
@@ -48,6 +54,8 @@ export default function App() {
     { id: 'f1-2', source: '1', target: '3' },
     { id: 'm2-3', source: '2', target: '3', animated: true },
   ];
+
+  const nodeTypes = useMemo(() => ({ personNode: PersonNode }), []);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -65,7 +73,11 @@ export default function App() {
               className="App"
               style={{ height: '900px', width: '100%' }}
             >
-              <LineageGraph edges={initialEdges} nodes={initialNodes} />
+              <LineageGraph
+                edges={initialEdges}
+                nodes={initialNodes}
+                nodeTypes={nodeTypes}
+              />
             </Container>
           </AppLayout>
         </MantineProvider>
