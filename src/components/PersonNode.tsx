@@ -7,6 +7,19 @@ type PersonNodeProps = {
 };
 
 export default function PersonNode({ data }: PersonNodeProps) {
+
+
+  const handleAddAncestor = () => {
+    console.log('ancestor added');
+  };
+
+  const handleAddDescendant = () => {
+    console.log('adding descendant');
+  };
+
+
+
+
   return (
     <>
       <Handle type="source" position={Position.Top} id="ancestor" />
@@ -26,8 +39,8 @@ export default function PersonNode({ data }: PersonNodeProps) {
           <Group position="right">
             <Menu>
               <Menu.Label>Context Actions</Menu.Label>
-              <Menu.Item>Add Ancestor</Menu.Item>
-              <Menu.Item>Add Descendant</Menu.Item>
+              <Menu.Item onClick={handleAddAncestor}>Add Ancestor</Menu.Item>
+              <Menu.Item onClick={handleAddDescendant}>Add Descendant</Menu.Item>
               <Divider />
               <Menu.Label>Danger Zone</Menu.Label>
               <Menu.Item>Hide</Menu.Item>
