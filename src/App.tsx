@@ -14,6 +14,7 @@ import AppLayout from './components/AppLayout';
 import LineageGraph from './components/LineageGraph';
 import Person from './lib/models/Person';
 import PersonNode from './components/PersonNode';
+import PersonContext from './PersonContext';
 
 const queryClient = new QueryClient();
 
@@ -69,16 +70,17 @@ export default function App() {
           withNormalizeCSS
         >
           <AppLayout>
+            <PersonContext.Provider value={{edgeGraph: initialEdges, nodeGraph: initialNodes}}>
             <Container
               className="App"
               style={{ height: '900px', width: '100%' }}
             >
               <LineageGraph
-                edges={initialEdges}
-                nodes={initialNodes}
                 nodeTypes={nodeTypes}
               />
             </Container>
+
+            </PersonContext.Provider>
           </AppLayout>
         </MantineProvider>
       </ColorSchemeProvider>
