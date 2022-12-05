@@ -1,23 +1,17 @@
-import { useContext } from 'react';
-import ReactFlow, {
-  Controls,
-  MiniMap,
-  NodeTypes,
-} from 'react-flow-renderer';
-import PersonContext from '../PersonContext';
+import ReactFlow, { Controls, MiniMap, NodeTypes } from 'react-flow-renderer';
+import useStore from '../lib/store';
 
 type LineageGraphProps = {
   nodeTypes: NodeTypes | undefined;
 };
 
-export default function LineageGraph({
-  nodeTypes,
-}: LineageGraphProps) {
-
-  const {nodeGraph, edgeGraph} = useContext(PersonContext);
-
+export default function LineageGraph({ nodeTypes }: LineageGraphProps) {
+  const { nodes, edges } = useStore((state) => ({
+    nodes: state.nodes,
+    edges: state.edges,
+  }));
   return (
-    <ReactFlow nodes={nodeGraph} edges={edgeGraph} fitView nodeTypes={nodeTypes}>
+    <ReactFlow nodes={nodes} edges={edges} fitView nodeTypes={nodeTypes}>
       <MiniMap />
       <Controls />
     </ReactFlow>

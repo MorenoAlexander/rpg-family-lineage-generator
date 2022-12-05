@@ -5,36 +5,26 @@ export default class Person {
 
   lastName: string;
 
-  father?: Node<Person>;
-
   fatherId?: string;
-
-  mother?: Node<Person>;
 
   motherId?: string;
 
   isMale = true;
 
-  partners?: Node<Person[]>;
-
-  children?: Node<Person[]>;
-
   constructor(
     firstName: string,
     lastName: string,
-    father?: Node<Person>,
-    mother?: Node<Person>,
+    fatherId?: string,
+    motherId?: string,
   ) {
     this.firstName = firstName;
     this.lastName = lastName;
 
-    if (father) {
-      this.father = father;
-      this.fatherId = father.id;
+    if (fatherId) {
+      this.fatherId = fatherId;
     }
-    if (mother) {
-      this.mother = mother;
-      this.motherId = mother.id;
+    if (motherId) {
+      this.motherId = motherId;
     }
   }
 
@@ -43,6 +33,12 @@ export default class Person {
   }
 
   get isRoot(): boolean {
-    return !this.father && !this.mother;
+    return !this.fatherId && !this.motherId;
   }
 }
+
+export const NewMotherNode = (firstName: string, lastName: string) => {
+  const person = new Person(firstName, lastName);
+  person.isMale = false;
+  return person;
+};

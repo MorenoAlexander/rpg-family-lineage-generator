@@ -7,8 +7,6 @@ type PersonNodeProps = {
 };
 
 export default function PersonNode({ data }: PersonNodeProps) {
-
-
   const handleAddAncestor = () => {
     console.log('ancestor added');
   };
@@ -17,12 +15,15 @@ export default function PersonNode({ data }: PersonNodeProps) {
     console.log('adding descendant');
   };
 
-
-
-
   return (
     <>
-      <Handle type="source" position={Position.Top} id="ancestor" />
+      <Handle type="target" position={Position.Top} id="parent" />
+      {!data.isMale && (
+        <>
+          <Handle type="target" position={Position.Left} id="motherLeft" />
+          <Handle type="target" position={Position.Right} id="motherRight" />
+        </>
+      )}
       <Paper shadow="md" p="md" withBorder>
         <Group direction="row">
           <Group position="left">
@@ -40,7 +41,9 @@ export default function PersonNode({ data }: PersonNodeProps) {
             <Menu>
               <Menu.Label>Context Actions</Menu.Label>
               <Menu.Item onClick={handleAddAncestor}>Add Ancestor</Menu.Item>
-              <Menu.Item onClick={handleAddDescendant}>Add Descendant</Menu.Item>
+              <Menu.Item onClick={handleAddDescendant}>
+                Add Descendant
+              </Menu.Item>
               <Divider />
               <Menu.Label>Danger Zone</Menu.Label>
               <Menu.Item>Hide</Menu.Item>
@@ -49,7 +52,14 @@ export default function PersonNode({ data }: PersonNodeProps) {
           </Group>
         </Group>
       </Paper>
-      <Handle type="target" position={Position.Bottom} />
+      {data.isMale ? (
+        <>
+          <Handle type="source" position={Position.Left} id="fatherLeft" />
+          <Handle type="source" position={Position.Right} id="fatherRight" />
+        </>
+      ) : (
+        <Handle id="motherBottom" position={Position.Bottom} type="source" />
+      )}
     </>
   );
 }
