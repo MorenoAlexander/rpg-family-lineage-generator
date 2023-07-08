@@ -1,6 +1,6 @@
-import { Handle, Position } from 'react-flow-renderer';
 import { Avatar, Divider, Group, Menu, Paper, Text } from '@mantine/core';
-import Person from '../lib/models/Person';
+import { Handle, Position } from 'react-flow-renderer';
+import { Person } from '../lib/models/Person';
 
 type PersonNodeProps = {
   data: Person;

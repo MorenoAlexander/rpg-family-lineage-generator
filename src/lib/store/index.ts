@@ -1,22 +1,24 @@
 import create from 'zustand';
 
 import {
+  addEdge,
+  applyEdgeChanges,
+  applyNodeChanges,
   Connection,
   Edge,
   EdgeChange,
   Node,
   NodeChange,
-  addEdge,
-  OnNodesChange,
-  OnEdgesChange,
   OnConnect,
-  applyNodeChanges,
-  applyEdgeChanges,
+  OnEdgesChange,
+  OnNodesChange,
 } from 'reactflow';
 
+import { Person } from '../models/Person';
 import { initialEdges, initiialNodes } from './defaults';
 
 type RFState = {
+  persons: Person[];
   nodes: Node[];
   edges: Edge[];
   onNodesChange: OnNodesChange;
@@ -25,14 +27,8 @@ type RFState = {
 };
 
 const useStore = create<RFState>((set, get) => ({
-  nodes: initiialNodes.map((person, index) => {
-    const node: Node = {
-      id: person.id,
-      data: person,
-      position: { x: index + 1, y: index + 1 },
-    };
-    return node;
-  }),
+  persons: [],
+  nodes: initiialNodes,
   edges: initialEdges,
   onNodesChange: (changes: NodeChange[]) => {
     set({
