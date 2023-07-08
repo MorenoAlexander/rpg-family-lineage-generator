@@ -40,7 +40,7 @@ export const initiialNodes: Node[] = [
   {
     id: '1',
     type: 'personNode',
-    data: newOriginalPerson('Stonebeard', ''),
+    data: newOriginalPerson('1', 'Stonebeard', ''),
     position: { x: 0, y: 0 },
   },
   {

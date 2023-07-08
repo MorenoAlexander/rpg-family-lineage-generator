@@ -14,11 +14,11 @@ import {
   OnNodesChange,
 } from 'reactflow';
 
-import { Person } from '../models/Person';
+import { newOriginalPerson, Person } from '../models/Person';
 import { initialEdges, initiialNodes } from './defaults';
 
 type RFState = {
-  persons: Person[];
+  persons: Map<string, Person>;
   nodes: Node[];
   edges: Edge[];
   onNodesChange: OnNodesChange;
@@ -27,7 +27,7 @@ type RFState = {
 };
 
 const useStore = create<RFState>((set, get) => ({
-  persons: [],
+  persons: new Map<string, Person>(),
   nodes: initiialNodes,
   edges: initialEdges,
   onNodesChange: (changes: NodeChange[]) => {
@@ -44,6 +44,22 @@ const useStore = create<RFState>((set, get) => ({
     set({
       edges: addEdge(connection, get().edges),
     });
+  },
+  generateOffSpring: (personId: string) => {
+    const map = get().persons;
+    const person = map.get(personId);
+    if (person?.spouseId && map.has(person.spouseId)) {
+      const spouse = map.get(person.spouseId)!;
+      if (
+        (spouse.isMale && !person.isMale) ||
+        (!spouse.isMale && person.isMale)
+      ) {
+        // generate the new offspring
+        const newPerson = newOriginalPerson(
+          `${person.id}-${spouse.id}-${person.children.length}`,
+        );
+      }
+    }
   },
 }));
 
