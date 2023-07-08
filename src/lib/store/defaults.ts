@@ -17,23 +17,8 @@ export const initialEdges: Edge[] = [
   },
 ];
 
-export const initiialNodes: Node[] = [
-  {
-    id: '1',
-    type: 'personNode',
-    data: new Person('Stonebeard', ''),
-    position: { x: 0, y: 0 },
-  },
-  {
-    id: '2',
-    type: 'personNode',
-    data: NewMotherNode('Stonebeard', 'Wife of Stonebeard'),
-    position: { x: 250, y: 0 },
-  },
-  {
-    id: '3',
-    type: 'personNode',
-    data: new Person('Stonebeard', 'First son of Stonebeard'),
-    position: { x: 250, y: 250 },
-  },
+export const initiialNodes: Person[] = [
+  new Person('1', 'Stonebeard', ''),
+  new Person('2', 'Stonebeard', 'Wife of Stonebeard'),
+  new Person('3', 'Stonebeard', 'Son of Stonebeard'),
 ];

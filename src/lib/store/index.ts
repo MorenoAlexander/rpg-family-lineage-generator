@@ -25,7 +25,14 @@ type RFState = {
 };
 
 const useStore = create<RFState>((set, get) => ({
-  nodes: initiialNodes,
+  nodes: initiialNodes.map((person, index) => {
+    const node: Node = {
+      id: person.id,
+      data: person,
+      position: { x: index + 1, y: index + 1 },
+    };
+    return node;
+  }),
   edges: initialEdges,
   onNodesChange: (changes: NodeChange[]) => {
     set({
