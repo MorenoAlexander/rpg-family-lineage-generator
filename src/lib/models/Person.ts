@@ -1,5 +1,4 @@
 import crypto from 'crypto';
-import { Node } from 'react-flow-renderer';
 
 export interface Person {
   id: string;
@@ -7,6 +6,8 @@ export interface Person {
   lastName: string;
   fatherId?: string;
   motherId?: string;
+  spouse?: string;
+  children?: string[];
   isMale: boolean;
 }
 
